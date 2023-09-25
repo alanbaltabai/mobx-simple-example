@@ -1,8 +1,14 @@
 import { observer } from 'mobx-react-lite';
 
-import store from './Store';
+interface CountViewProps {
+	store: {
+		count: number | undefined;
+		increment: () => void;
+		decrement: () => void;
+	};
+}
 
-const CountView = observer(function () {
+const CountView = observer(function ({ store }: CountViewProps) {
 	return (
 		<section>
 			<button onClick={() => store.decrement()}>-</button>

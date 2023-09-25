@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 
 class Store {
-	data: any = {};
+	data: any = [];
 	count: number | undefined = 0;
 
 	constructor() {
@@ -19,11 +19,13 @@ class Store {
 	async getData() {
 		try {
 			const response = await fetch(
-				'https://medical.zhasapp.com/backend/products?searchJoin=and&with=shop&orderBy=updated_at&sortedBy=ASC&search=categories.slug:antibakterialnye-sredstva%3Bstatus:publish'
+				'https://jsonplaceholder.typicode.com/posts'
 			);
 			const json = await response.json();
 
-			runInAction(() => (this.data = json));
+			runInAction(() => {
+				this.data = json;
+			});
 		} catch (error) {
 			runInAction(() => {
 				if (error instanceof Error) this.data = error.message;

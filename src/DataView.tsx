@@ -1,14 +1,14 @@
 import { observer } from 'mobx-react-lite';
 
-import store from './Store';
+import store from './store';
 
 const DataView = observer(function () {
 	return (
 		<section>
 			<button onClick={() => store.getData()}>Get data!</button>
 
-			{store.data.data ? (
-				store.data.data.map((item: any) => (
+			{store.data ? (
+				store.data.map((item: any) => (
 					<div key={crypto.randomUUID()}>
 						<h1>Price: {item.price}</h1>
 						<p>Description: {item.description}</p>
@@ -16,7 +16,7 @@ const DataView = observer(function () {
 					</div>
 				))
 			) : (
-				<h1></h1>
+				<h1>Loading</h1>
 			)}
 		</section>
 	);
